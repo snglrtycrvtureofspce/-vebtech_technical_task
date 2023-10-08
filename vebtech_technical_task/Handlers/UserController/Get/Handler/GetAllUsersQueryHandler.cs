@@ -37,7 +37,8 @@ public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, IEnumer
         
         if (!string.IsNullOrWhiteSpace(request.Filter))
         {
-            query = query.Where(u => u.Name.Contains(request.Filter) || u.Email.Contains(request.Filter));
+            query = query.Where(u => u.Name.Contains(request.Filter) || u.Email.Contains(request.Filter) ||
+                                     u.Roles.Any(r => r.Name.Contains(request.Filter)));
         }
         
         if (!string.IsNullOrWhiteSpace(request.SortBy))
